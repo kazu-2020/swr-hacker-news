@@ -1,11 +1,11 @@
 import DefaultLayout from '@layout/Default';
 import { Box, Center, Button, Spinner } from '@chakra-ui/react';
-import { useStories } from 'api/HackerNews';
+import { useJobs } from 'api/HackerNews';
 import HackerNewsCard from '@module/Card/HackerNewsCard';
 import { displayDate } from '@util/dayjs';
 
-const Home = () => {
-  const { stories, refetchStories, isLoading } = useStories(30);
+const Jobs = () => {
+  const { jobs, refetchJobs, isLoading } = useJobs(30);
 
   return (
     <DefaultLayout>
@@ -15,19 +15,19 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
-              <Button variant="ghost" onClick={() => refetchStories()}>
+              <Button variant="ghost" onClick={() => refetchJobs()}>
                 データ更新
               </Button>
 
-              {stories?.map((story) => (
+              {jobs?.map((job) => (
                 <HackerNewsCard
-                  key={story.id}
-                  title={story.title}
-                  url={story.url}
-                  type={story.type}
-                  starCount={story?.score ?? 0}
-                  postedDate={displayDate(story.time)}
-                  authorName={story.by}
+                  key={job.id}
+                  title={job.title}
+                  url={job.url}
+                  type={job.type}
+                  starCount={job?.score ?? 0}
+                  postedDate={displayDate(job.time)}
+                  authorName={job.by}
                 />
               ))}
             </>
@@ -38,4 +38,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Jobs;

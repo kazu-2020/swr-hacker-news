@@ -7,7 +7,7 @@ const Header = () => {
 
   const links = [
     { id: '0', title: '人気', url: '/' },
-    { id: '1', title: '求人', url: '#' },
+    { id: '1', title: '求人', url: '/jobs' },
   ];
 
   return (
