@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
-import { Box } from '@chakra-ui/react';
+import Home from '@template/Home';
 
-const Home: NextPage = () => <Box>Hello</Box>;
-
-export default Home;
+const HomePage: NextPage = () => <Home />;
+export default HomePage;
