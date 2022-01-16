@@ -1,6 +1,7 @@
 import { Box, Text, Icon, Flex, Tag, TagLabel, Heading } from '@chakra-ui/react';
 import { StarIcon, LinkIcon } from '@chakra-ui/icons';
 import { HackerNewsType } from '@type/api/HackerNews';
+import { useRouter } from 'next/router';
 
 type HackerNewsCardProps = {
   title?: string;
@@ -19,6 +20,8 @@ const HackerNewsCard = ({
   postedDate,
   authorName,
 }: HackerNewsCardProps) => {
+  const router = useRouter();
+
   const displayType = (type: HackerNewsType) => {
     switch (type) {
       case 'job':
@@ -31,7 +34,15 @@ const HackerNewsCard = ({
   };
 
   return (
-    <Box w="600px" p={4} border="1px solid" borderColor="gray.300" borderRadius="4px">
+    <Box
+      w="600px"
+      p={4}
+      border="1px solid"
+      borderColor="gray.300"
+      borderRadius="4px"
+      cursor="pointer"
+      onClick={() => window.open(url, '_blank', 'noreferrer')}
+    >
       <Flex justifyContent="space-between" mb={2}>
         <Tag>
           <TagLabel>{displayType(type)}</TagLabel>
@@ -55,7 +66,15 @@ const HackerNewsCard = ({
 
       <Flex gridColumnGap={2}>
         <Text>投稿者</Text>
-        <Text maxW={'50%'} isTruncated>
+        <Text
+          maxW={'50%'}
+          isTruncated
+          _hover={{ textDecoration: 'underline' }}
+          onClick={(event) => {
+            router.push(`/users/${authorName}`);
+            event.stopPropagation();
+          }}
+        >
           {authorName}
         </Text>
       </Flex>

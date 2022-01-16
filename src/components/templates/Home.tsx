@@ -20,21 +20,15 @@ const Home = () => {
               </Button>
 
               {stories?.map((story) => (
-                <Link
+                <HackerNewsCard
                   key={story.id}
-                  _hover={{ bgColor: 'gray.50' }}
-                  href={story.url ?? ''}
-                  isExternal
-                >
-                  <HackerNewsCard
-                    title={story.title}
-                    url={story.url}
-                    type={story.type}
-                    starCount={story?.score ?? 0}
-                    postedDate={displayDate(story.time)}
-                    authorName={story.by}
-                  />
-                </Link>
+                  title={story.title}
+                  url={story.url}
+                  type={story.type}
+                  starCount={story?.score ?? 0}
+                  postedDate={displayDate(story.time)}
+                  authorName={story.by}
+                />
               ))}
             </>
           )}

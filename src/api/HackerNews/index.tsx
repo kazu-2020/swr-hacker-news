@@ -1,6 +1,6 @@
 import { hackerNews } from '@api/RestClient';
 import useSWR from 'swr';
-import { HackerNewsJob, HackerNewsStory } from '@type/api/HackerNews';
+import { HackerNewsJob, HackerNewsStory, HackerNewsUser } from '@type/api/HackerNews';
 
 const getStoryAndJob = (url: string): Promise<HackerNewsJob | HackerNewsStory> =>
   hackerNews.get(url).then((res) => res.data);
@@ -20,5 +20,18 @@ export const useStories = (count: number) => {
     error,
     isLoading: !error && !data,
     refetchStories: mutate,
+  };
+};
+
+export const useUser = (userId: string) => {
+  const fetcher: () => Promise<HackerNewsUser> = () =>
+    hackerNews.get(`/user/${userId}.json`).then((res) => res.data);
+
+  const { data, error } = useSWR(['/user', userId], fetcher);
+
+  return {
+    profile: data,
+    error,
+    isLoading: !error && !data,
   };
 };
