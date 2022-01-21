@@ -15,6 +15,7 @@ const Home = () => {
             <Spinner />
           ) : (
             <>
+              {/* 再取得が上手くいかない... */}
               <Button variant="ghost" onClick={() => refetchStories()}>
                 データ更新
               </Button>
